@@ -28,7 +28,7 @@ LinkedQueue<T>::~LinkedQueue() {
 template <typename T>
 T LinkedQueue<T>::back() const {
     // TODO
-    if (this->length == 0) throw string("Can't access back. Empty Queue");
+    if (this->length == 0) throw string("back: error, queue is empty, cannot access the back");
     return last->value;
 }
 
@@ -78,16 +78,24 @@ void LinkedQueue<T>::dequeue() {
 template <typename T>
 void LinkedQueue<T>::enqueue(const T& elem) {
     // TODO
-    Node* newNode = new Node(elem, head);
-    head = newNode;
-    if (this->length == 0) last = newNode;
+    Node* newNode = new Node(elem);
+
+    if (this->length == 0)
+    {
+        head = newNode;
+    }
+    else
+    {
+        last->next = newNode;
+    }
+        last = newNode;
     this->length++;
 }
 
 template <typename T>
 T LinkedQueue<T>::front() const {
     // TODO
-    if (this->length == 0) throw string("Can't access front. Empty Queue");
+    if (this->length == 0) throw string("front: error, queue is empty, cannot access the front");
     return head->value;
 }
 
